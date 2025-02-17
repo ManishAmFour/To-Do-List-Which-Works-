@@ -1,13 +1,19 @@
 import { useState, useRef } from "react";
+import Background from "./Background";
 
 let ProjectName;
 let taskName;
 let TaskDescription;
 let DateValue;
 
-
-let ProjectCart = [];
-let ToDoCart = [];
+let ProjectCart = JSON.parse(localStorage.getItem("project-list")) || [];
+let ToDoCart = JSON.parse(localStorage.getItem("todo-list")) || [
+  {
+    task: "Waking up Early",
+    description: "Setting up the alarm and strictly following the schedule",
+    dueDate: "Everyday",
+  },
+];
 
 let date = new Date();
 let Year = date.getFullYear();
@@ -21,41 +27,42 @@ function TodoMaker() {
 
   taskName = useRef("task");
   TaskDescription = useRef("empty");
-  DateValue = useRef('')
+  DateValue = useRef("");
 
   function DateChange(value) {
     setDateChange(value);
   }
 
   return (
-    <div className="input-bar-div">
-      <input placeholder="name of the task"></input>
-      <textarea
-        ref={TaskDescription}
-        className="description-text"
-        placeholder="description"
-      />
-      <input
-        value={dateChange}
-        onChange={(e) => {
-          DateChange(e.target.value);
-        }}
-        ref={DateValue}
-        type="date"
-      />
+    <>
+      <div className="input-bar-div">
+        <input ref={taskName} placeholder="name of the task"></input>
+        <textarea
+          ref={TaskDescription}
+          className="description-text"
+          placeholder="description"
+        />
+        <input
+          value={dateChange}
+          onChange={(e) => {
+            DateChange(e.target.value);
+          }}
+          ref={DateValue}
+          type="date"
+        />
 
-      <select>
-        <option>High priority</option>
-        <option>Medium priority</option>
-        <option>Low priority</option>
-      </select>
-    </div>
+        <select>
+          <option>High priority</option>
+          <option>Medium priority</option>
+          <option>Low priority</option>
+        </select>
+      </div>
+    </>
   );
 }
 
 function ProjectDisplay() {
   ProjectName = useRef("initial");
-  console.log(DateValue)
   return (
     <p className="project-input">
       Project Name:- <input ref={ProjectName} />
@@ -65,35 +72,43 @@ function ProjectDisplay() {
 
 function ProjectMaker() {
   const [Switch, useSwitch] = useState("project");
-
   function changeState() {
     if (Switch === "project") {
       if (ProjectName.current.value !== "") {
-        useSwitch("todo");
         ProjectCart.push(ProjectName.current.value);
         localStorage.setItem("project-list", JSON.stringify(ProjectCart));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useSwitch("todo");
       }
     } else {
       if (
         taskName.current.value !== "" &&
         TaskDescription.current.value !== ""
       ) {
-        useSwitch("project");
         let NewTask = {
           task: taskName.current.value,
           description: TaskDescription.current.value,
+          dueDate: DateValue.current.value,
         };
+
         ToDoCart.push(NewTask);
         localStorage.setItem("todo-list", JSON.stringify(ToDoCart));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useSwitch("project");
       }
     }
   }
 
   return (
-    <div className="input-query-bar">
-      {Switch === "project" ? <ProjectDisplay /> : <TodoMaker />}
+    <div>
+      <div>
+        <Background projectList={ProjectCart} TodoList={ToDoCart} />
+      </div>
+      <div className="input-query-bar">
+        {Switch === "project" ? <ProjectDisplay /> : <TodoMaker />}
 
-      <button onClick={changeState}>Enter</button>
+        <button onClick={changeState}>Enter</button>
+      </div>
     </div>
   );
 }

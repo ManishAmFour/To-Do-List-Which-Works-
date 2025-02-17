@@ -1,49 +1,93 @@
-.background{
-    background-color: aquamarine;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom:  0;
-    position: fixed;
-    z-index: 0;
+.background {
+  background-color: aquamarine;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 0;
 }
 
-.title{
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-    margin-top: 0px;
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
 }
 
-.project-sidebar{
-    background-color: bisque;
-    width: 130px;
-    position: fixed;
-    left: 0;
-    top: 200px;
-    bottom: 0;
-}
-.project-title{
-    display: flex;
-    justify-content: center;
-    text-decoration: underline;
+.delete-button {
+  z-index: 2;
+  position: relative;
 }
 
-.todo-list{
-    
-    position: fixed;
-    left: 130px;
-    top: 200px;
-    color: white;
-    bottom: 0;
-    right: 0;
-    background-color: black;
+.project-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: bisque;
+  width: 130px;
+  row-gap: 20px;
+  position: fixed;
+  left: 0;
+  top: 200px;
+  bottom: 0;
+}
+.project-title {
+  display: flex;
+  justify-content: center;
+  text-decoration: underline;
 }
 
-.todo-title{
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    margin-top: 0;
-    text-decoration: underline;
+.todo-list {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+
+  left: 130px;
+  color: black;
+  padding: 0;
+  bottom: 0;
+  right: 0;
+  top: 200px;
+  background-color: white;
+}
+
+.todo-task-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 10px;
+  place-items: center;
+  column-gap: 20px;
+  margin-left: 30px;
+}
+
+.project-div {
+  position: relative;
+  transform: scale(1);
+  border-color: black;
+  border-style: solid;
+  max-width: 100px;
+  row-gap: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-div {
+  min-width: 300px;
+  min-height: 200px;
+  padding: 20px;
+  border-color: black;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-title {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  text-decoration: underline;
 }
