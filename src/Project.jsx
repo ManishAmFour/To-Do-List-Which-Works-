@@ -12,6 +12,7 @@ let ToDoCart = JSON.parse(localStorage.getItem("todo-list")) || [
     task: "Waking up Early",
     description: "Setting up the alarm and strictly following the schedule",
     dueDate: "Everyday",
+    status: "static"
   },
 ];
 
@@ -72,12 +73,13 @@ function ProjectDisplay() {
 
 function ProjectMaker() {
   const [Switch, useSwitch] = useState("project");
+  const [CurrentProjectName, setCurrentProjectName] = useState("");
   function changeState() {
     if (Switch === "project") {
       if (ProjectName.current.value !== "") {
         ProjectCart.push(ProjectName.current.value);
+        setCurrentProjectName(ProjectName.current.value);
         localStorage.setItem("project-list", JSON.stringify(ProjectCart));
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         useSwitch("todo");
       }
     } else {
@@ -86,14 +88,15 @@ function ProjectMaker() {
         TaskDescription.current.value !== ""
       ) {
         let NewTask = {
+          project: CurrentProjectName,
           task: taskName.current.value,
           description: TaskDescription.current.value,
           dueDate: DateValue.current.value,
+          status: "static",
         };
 
         ToDoCart.push(NewTask);
         localStorage.setItem("todo-list", JSON.stringify(ToDoCart));
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         useSwitch("project");
       }
     }
@@ -102,7 +105,13 @@ function ProjectMaker() {
   return (
     <div>
       <div>
-        <Background projectList={ProjectCart} TodoList={ToDoCart} />
+        <Background
+          Switch={Switch}
+          setCurrentProjectName={setCurrentProjectName}
+          useSwitch={useSwitch}
+          projectList={ProjectCart}
+          TodoList={ToDoCart}
+        />
       </div>
       <div className="input-query-bar">
         {Switch === "project" ? <ProjectDisplay /> : <TodoMaker />}
