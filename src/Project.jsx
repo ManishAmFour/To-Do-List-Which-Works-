@@ -6,9 +6,10 @@ let taskName;
 let TaskDescription;
 let DateValue;
 
-let ProjectCart = JSON.parse(localStorage.getItem("project-list")) || [];
+let ProjectCart = JSON.parse(localStorage.getItem("project-list")) || ['first project'];
 let ToDoCart = JSON.parse(localStorage.getItem("todo-list")) || [
   {
+    project: 'first project',
     task: "Waking up Early",
     description: "Setting up the alarm and strictly following the schedule",
     dueDate: "Everyday",
