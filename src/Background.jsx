@@ -1,5 +1,5 @@
 import "./Layout.css";
-import { use, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 let inputName;
 let inputDesc;
@@ -19,14 +19,10 @@ function Background({
   inputDesc = useRef("");
   inputDate = useRef("");
 
-  function SetInput(e) {
-    inputChange(e);
-  }
-
   function specificProjectShown(element, index) {
     if (index === 0) {
       let DisplayTodo = JSON.parse(localStorage.getItem("todo-list")).map(
-        (todo, TodoIndex) => {
+        (todo) => {
           return todo;
         }
       );
@@ -34,12 +30,12 @@ function Background({
       setEditUpdate(DisplayTodo);
     } else {
       let DisplayTodo = JSON.parse(localStorage.getItem("todo-list"))
-        .map((todo, TodoIndex) => {
+        .map((todo) => {
           if (element === todo.project) {
             return todo;
           }
         })
-        .filter((value, index) => {
+        .filter((value) => {
           if (value !== undefined) {
             return value;
           }
@@ -61,7 +57,7 @@ function Background({
   }
 
   function editTheTodo(todo) {
-    ListOfTodos.forEach((element, index) => {
+    ListOfTodos.forEach((element) => {
       if (todo.task === element.task && todo.status === "static") {
         let NewList = ListOfTodos.map((element) => {
           if (element.task === todo.task) {
@@ -87,7 +83,7 @@ function Background({
 
         localStorage.setItem("todo-list", JSON.stringify(NewList));
       } else if (todo.task === element.task && todo.status === "edit") {
-        let NewTodoList = ListOfTodos.map((element, index) => {
+        let NewTodoList = ListOfTodos.map((element) => {
           if (element.task === todo.task) {
             return {
               project: todo.project,
@@ -113,30 +109,30 @@ function Background({
     });
   }
 
-  function deleteTheProject(element, index) {
+  function deleteTheProject(element) {
     const NewProjectList = JSON.parse(localStorage.getItem("project-list"))
-      .map((project, index) => {
+      .map((project) => {
         if (project === element) {
           return undefined;
         } else if (project !== element) {
           return project;
         }
       })
-      .filter((value, index) => {
+      .filter((value) => {
         if (value !== undefined) {
           return value;
         }
       });
 
     const NewTodoList = JSON.parse(localStorage.getItem("todo-list"))
-      .map((todo, index) => {
+      .map((todo) => {
         if (todo.project === element) {
           return null;
         } else if (todo.project !== element) {
           return todo;
         }
       })
-      .filter((value, index) => {
+      .filter((value) => {
         if (value !== undefined) {
           return value;
         }
@@ -148,16 +144,16 @@ function Background({
     localStorage.setItem("project-list", JSON.stringify(NewProjectList));
   }
 
-  function deleteTheTodo(element, index) {
+  function deleteTheTodo(element) {
     const NewTodoList = JSON.parse(localStorage.getItem("todo-list"))
-      .map((todo, index) => {
+      .map((todo) => {
         if (todo.task === element.task) {
           return null;
         } else if (todo.project !== element) {
           return todo;
         }
       })
-      .filter((value, index) => {
+      .filter((value) => {
         if (value !== undefined) {
           return value;
         }
@@ -169,7 +165,7 @@ function Background({
     let ProjectNameCurrent = element.project;
 
     if (
-      JSON.parse(localStorage.getItem("todo-list")).find((todo, index) => {
+      JSON.parse(localStorage.getItem("todo-list")).find((todo) => {
         if (todo.project === ProjectNameCurrent) {
           return true;
         }
@@ -178,7 +174,7 @@ function Background({
       console.log("yes");
     } else {
       let NewProjectArray = JSON.parse(localStorage.getItem("project-list"))
-        .map((element, index) => {
+        .map((element) => {
           if (ProjectNameCurrent === element) {
             return undefined;
           } else {
@@ -228,6 +224,7 @@ function Background({
                       AddMoreTodos(index);
                       event.stopPropagation();
                     }}
+                    className="add-button"
                   >
                     Add More
                   </button>
@@ -246,13 +243,16 @@ function Background({
                   <p>{todo.dueDate}</p>
                   <div className="function-buttons">
                     <button
+                      className="todo-buttons todo-delete-button"
                       onClick={() => {
                         deleteTheTodo(todo, index);
                       }}
+                    
                     >
                       Delete
                     </button>
                     <button
+                      className="todo-buttons todo-edit-button"
                       onClick={() => {
                         editTheTodo(todo);
                       }}

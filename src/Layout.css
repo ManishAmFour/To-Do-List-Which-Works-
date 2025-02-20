@@ -1,5 +1,4 @@
 .background {
-  background-color: aquamarine;
   margin-left: -10px;
   margin-right: -10px;
   min-width: 1300px;
@@ -22,16 +21,30 @@
   column-gap: 20px;
 }
 
-.delete-button {
+.delete-button,
+.add-button {
   z-index: 1;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
   position: relative;
+}
+
+.delete-button:hover,
+.add-button:hover {
+  color: white;
+  background-color: black;
+  border-color: black;
 }
 
 .project-sidebar {
   display: flex;
+  padding: 10px;
+  border-style: solid;
+  border-width: 2px;
   flex-direction: column;
   align-items: center;
-  background-color: bisque;
   width: 130px;
   row-gap: 20px;
   left: 0;
@@ -44,14 +57,10 @@
 
 .todo-list {
   display: grid;
-  grid-template-columns: 200px 1fr ;
+  grid-template-columns: 200px 1fr;
   color: black;
-  padding: 0;
-  bottom: 0;
-  right: 0;
+  margin-top: 150px;
   top: 200px;
-  min-height: 100vh;
-  background-color: blue;
 }
 
 .todo-task-summary {
@@ -60,13 +69,14 @@
   row-gap: 10px;
   place-items: center;
   column-gap: 10px;
-  margin-left: 10px;
+  margin-left: 0px;
 }
 
 .project-div {
   z-index: 0;
   border-color: black;
   border-style: solid;
+  background-color: white;
   max-width: 100px;
   row-gap: 10px;
   padding: 10px;
@@ -76,10 +86,24 @@
   justify-content: center;
 }
 
+.todo-buttons {
+  background-color: white;
+  padding: 6px;
+  border-radius: 3px;
+}
+
+.todo-buttons:hover {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+
 .todo-div {
   min-width: 300px;
   min-height: 200px;
   padding: 20px;
+  background-color: white;
+  border-radius: 50px;
   border-color: black;
   border-style: solid;
   display: flex;

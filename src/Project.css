@@ -1,0 +1,15 @@
+.enter-button-project {
+  background-color: white;
+  padding: 5px;
+  position: absolute;
+  right: -50px;
+  top: 15px;
+  border-radius: 10px;
+}
+
+.project-input-class {
+  padding: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}

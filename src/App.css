@@ -1,5 +1,8 @@
 .input-bar-div {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;  
+  max-height: 100px;
   
 }
 
@@ -14,7 +17,6 @@
 }
 
 .description-text {
-  background-color: aqua;
   font-size: 17px;
   padding-bottom: 60px;
 }

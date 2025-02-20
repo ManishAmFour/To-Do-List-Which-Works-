@@ -1,19 +1,22 @@
 import { useState, useRef } from "react";
 import Background from "./Background";
+import "./Project.css";
 
 let ProjectName;
 let taskName;
 let TaskDescription;
 let DateValue;
 
-let ProjectCart = JSON.parse(localStorage.getItem("project-list")) || ['first project'];
+let ProjectCart = JSON.parse(localStorage.getItem("project-list")) || [
+  "first project",
+];
 let ToDoCart = JSON.parse(localStorage.getItem("todo-list")) || [
   {
-    project: 'first project',
+    project: "first project",
     task: "Waking up Early",
     description: "Setting up the alarm and strictly following the schedule",
     dueDate: "Everyday",
-    status: "static"
+    status: "static",
   },
 ];
 
@@ -67,7 +70,7 @@ function ProjectDisplay() {
   ProjectName = useRef("initial");
   return (
     <p className="project-input">
-      Project Name:- <input ref={ProjectName} />
+      Project Name:- <input className="project-input-class" ref={ProjectName} />
     </p>
   );
 }
@@ -81,6 +84,7 @@ function ProjectMaker() {
         ProjectCart.push(ProjectName.current.value);
         setCurrentProjectName(ProjectName.current.value);
         localStorage.setItem("project-list", JSON.stringify(ProjectCart));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useSwitch("todo");
       }
     } else {
@@ -98,6 +102,7 @@ function ProjectMaker() {
 
         ToDoCart.push(NewTask);
         localStorage.setItem("todo-list", JSON.stringify(ToDoCart));
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         useSwitch("project");
       }
     }
@@ -117,7 +122,9 @@ function ProjectMaker() {
       <div className="input-query-bar">
         {Switch === "project" ? <ProjectDisplay /> : <TodoMaker />}
 
-        <button onClick={changeState}>Enter</button>
+        <button className="enter-button-project" onClick={changeState}>
+          Enter
+        </button>
       </div>
     </div>
   );
